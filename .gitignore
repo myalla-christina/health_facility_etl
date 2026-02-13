@@ -1,0 +1,6 @@
+data/raw
+data/interim
+logs/
+.Rhistory
+.RData
+.DS_Store
