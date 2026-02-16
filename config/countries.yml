@@ -1,3 +1,11 @@
+# =============================================================
+# Country Configuration and Column Mapping
+# Purpose:
+#  - Locate raw country files
+#  - Map raw column names to standardized schema
+#  - Define metadata and processing rules
+# =============================================================
+
 tanzania:
   raw_file: data/raw/tanzania/hf_tanzania_2026.csv
   facility_name_column:  name

@@ -1,13 +1,190 @@
+# =============================================================
+# Master Standardized Health Facility Schema
+# Purpose: Defines the final standardized structure for all
+#          country health facility datasets in the ETL pipeline
+# =============================================================
+
 standard_columns:
 
-  facility_id: string
-  facility_name: string
-  country: string
-  admin1: string
-  admin2: string
-  latitude: float
-  longitude: float
-  facility_type: string
-  ownership: string
-  data_source: string
-  year: integer
+  # -----------------------------------------------------------
+  # IDENTIFIERS
+  # -----------------------------------------------------------
+  facility_code:
+    type: string
+    description: Unique facility identifier (national or generated)
+    required: true
+    unique: true
+
+  facility_name:
+    type: string
+    description: Official facility name
+    required: true
+
+  country:
+    type: string
+    description: Country name
+    required: true
+    allowed_values:
+      - Tanzania
+      - Uganda
+      - Zambia
+      - Nigeria
+      - Malawi
+
+  # -----------------------------------------------------------
+  # ADMINISTRATIVE HIERARCHY
+  # -----------------------------------------------------------
+ # admin0:
+  #  type: string
+   # description: Country name (duplicate of country for compatibility)
+    #required: true
+
+  admin1:
+    type: string
+    description: Region / State / Province
+    required: true
+
+
+
+  # -----------------------------------------------------------
+  # GEOSPATIAL
+  # -----------------------------------------------------------
+  latitude:
+    type: float
+    description: Decimal latitude
+    required: true
+    min_value: -90
+    max_value: 90
+
+  longitude:
+    type: float
+    description: Decimal longitude
+    required: true
+    min_value: -180
+    max_value: 180
+
+  coordinate_source:
+    type: string
+    description: Source of the GPS coordinate (e.g., HMIS, GPS survey, OSM)
+    required: false
+
+  coordinate_precision:
+    type: string
+    description: Accuracy of coordinates (e.g., exact, approximate)
+    allowed_values:
+      - exact
+      - approximate
+      - unknown
+
+  # -----------------------------------------------------------
+  # FACILITY CLASSIFICATION
+  # -----------------------------------------------------------
+  facility_type:
+    type: string
+    description: Health facility type
+    required: true
+    allowed_values:
+      - Hospital
+      - Health Center
+      - Dispensary / Clinic
+      - Maternity Clinic
+      - Community Health Post
+      - Other
+
+  ownership:
+    type: string
+    description: Facility ownership
+    required: true
+    allowed_values:
+      - Public
+      - Private
+      - Faith-Based / NGO
+      - Other
+
+  managing_authority:
+    type: string
+    description: Organization responsible for facility management
+    required: false
+
+  # -----------------------------------------------------------
+  # SERVICE AVAILABILITY (BOOLEAN / Yes-No)
+  # -----------------------------------------------------------
+  inpatient:
+    type: boolean
+    description: Provides inpatient services
+    required: true
+
+  outpatient:
+    type: boolean
+    description: Provides outpatient services
+    required: true
+
+  maternity:
+    type: boolean
+    description: Provides maternity services
+    required: true
+
+  emergency:
+    type: boolean
+    description: Provides emergency services
+    required: true
+
+  laboratory:
+    type: boolean
+    description: Has laboratory services
+    required: true
+
+  malaria_services:
+    type: boolean
+    description: Provides malaria diagnosis or treatment
+    required: true
+
+  # -----------------------------------------------------------
+  # REPORTING AND SYSTEM INTEGRATION
+  # -----------------------------------------------------------
+  reporting_to_hmis:
+    type: boolean
+    description: Reports to national HMIS
+    required: true
+
+  facility_code_national:
+    type: string
+    description: National facility code (if available)
+    required: false
+
+  data_source:
+    type: string
+    description: Original data source
+    required: true
+    allowed_values:
+      - HMIS
+      - Master Facility List
+      - Survey
+      - Other
+
+  year:
+    type: integer
+    description: Year of data capture
+    required: true
+
+  # -----------------------------------------------------------
+  # METADATA / QUALITY
+  # -----------------------------------------------------------
+  data_quality_flag:
+    type: string
+    description: Data quality indicator
+    allowed_values:
+      - high
+      - medium
+      - low
+      - unknown
+
+  last_updated:
+    type: date
+    description: Last update of the record
+
+  extraction_date:
+    type: date
+    description: Date when data was extracted from source
+
+    
