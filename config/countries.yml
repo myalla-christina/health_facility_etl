@@ -17,6 +17,17 @@ tanzania:
   longitude: longitude
   operation_status: operatingstatus
 
+malawi:
+  raw_file: data/raw/malawi/MHFR_Facilities.xlsx
+  facility_name_column: COMMON NAME
+  facility_code_column: CODE
+  admin1_column: ZONE
+  facility_type: TYPE
+  facility_ownership: OWNERSHIP
+  latitude: LATITUDE
+  longitude: LONGITUDE
+  operation_status: STATUS  
+
 uganda:
   raw_file: data/raw/uganda/hf_data_extracted.csv
   facility_name_column: short_name
